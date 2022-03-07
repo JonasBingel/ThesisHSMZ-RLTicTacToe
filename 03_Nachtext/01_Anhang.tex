@@ -1,0 +1,103 @@
+\appendix
+\clearpage
+\pdfbookmark{Anhang}{anhang}
+
+\addcontentsline{toc}{chapter}{Anhang}
+
+
+\chapter{Model of Expert Performance}
+\label{chap:ModelofExpert}
+
+\begin{figure}[h]
+    \centering
+    \frame{\includegraphics[width=0.7\linewidth]{04_Artefakte/crowley_expertplay.pdf}}
+    \caption[Model of Expert Performance]{Model of Expert Performance von \citeauthor{crowleyFlexibleStrategyUse1993}, Auszug aus \cite[S. 536]{crowleyFlexibleStrategyUse1993}}
+\end{figure}
+
+\chapter{Beispiel für Meta-Log der Implementierung}
+\label{chap:meta}
+\begin{longlisting}
+\caption{Meta-Log der Implementierung}
+\label{listing:meta}
+\inputminted{text}{04_Artefakte/03_Listings/meta.txt}
+\end{longlisting}
+
+
+
+\chapter{minimax-Methode}
+\label{chap:minimax_listing}
+\begin{longlisting}
+\caption{minimax-Methode der Klasse MinimaxAlgorithm}
+\label{listing:minimax}
+\inputminted{java}{04_Artefakte/03_Listings/minimax.java}
+\end{longlisting}
+
+
+
+\chapter{Zusätzliche Auswertung zu Q-Learning}
+\label{chap:app_qlearning}
+\section{Konvergenz alternierendes Self-play}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_alpha_QLearning_ALTERNATE_X.pdf}
+   \caption{Symbol X}
+   \label{fig:convergence_compare_alpha_QLearning_ALTERNATE_X} 
+\end{subfigure}
+
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_alpha_QLearning_ALTERNATE_O.pdf}
+   \caption{Sybmol O}
+   \label{fig:convergence_compare_alpha_QLearning_ALTERNATE_O}
+\end{subfigure}
+\caption[Rate optimaler Aktionen Q-Learning unterschiedliche Lernraten, alternierendes \splay]{Rate optimaler Aktionen von Q-Learning für verschiedene Lernraten $\alpha$, alternierendes \splay (a) Symbol X (b) Symbol O}
+\label{fig:convergence_compare_alpha_QLearning_ALTERNATE}
+\end{figure}
+
+\section{Spielergebnismatritzen klassisches Self-play}
+\input{04_Artefakte/02_Tabellen/01_QLearning/resultmatrix_ql_normal_alpha02}
+\input{04_Artefakte/02_Tabellen/01_QLearning/resultmatrix_ql_normal_alpha_decay}
+
+\section{Spielergebnismatritzen alternierendes Self-play}
+
+\input{04_Artefakte/02_Tabellen/01_QLearning/resultmatrix_ql_alternate_alpha01}
+\input{04_Artefakte/02_Tabellen/01_QLearning/resultmatrix_ql_alternate_alpha02}
+\input{04_Artefakte/02_Tabellen/01_QLearning/resultmatrix_ql_alternate_alpha_decay}
+
+
+\chapter{Zusätzliche Auswertung zu Sarsa}
+\label{chap:app_sarsa}
+\section{Konvergenz alternierendes Self-play}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_alpha_SARSA_ALTERNATE_X.pdf}
+   \caption{Symbol X}
+   \label{fig:convergence_compare_alpha_SARSA_ALTERNATE_X} 
+\end{subfigure}
+
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_alpha_SARSA_ALTERNATE_O.pdf}
+   \caption{Sybmol O}
+   \label{fig:convergence_compare_alpha_SARSA_ALTERNATE_O}
+\end{subfigure}
+
+\caption[Rate optimaler Aktionen \sarsa unterschiedliche Lernraten, alternierendes \splay]{Rate optimaler Aktionen von \sarsa für verschiedene Lernraten $\alpha$, alternierendes \splay (a) Symbol X (b) Symbol O}
+\label{fig:convergence_compare_alpha_SARSA_ALTERNATE}
+\end{figure}
+
+\section{Spielergebnismatritzen klassisches Self-play}
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_normal_alpha02}
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_normal_alpha_decay}
+
+\section{Spielergebnismatritzen alternierendes Self-play}
+
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_alternate_alpha01}
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_alternate_alpha02}
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_alternate_alpha_decay}

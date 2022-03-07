@@ -1,0 +1,15 @@
+\begin{table}
+\centering
+\caption[Spielstärke \sarsa unterschiedliche Lernraten, alternierendes \splay]{Spielstärke von \sarsa mit unterschiedlichen Lernraten, alternierendes \splay}
+\label{tab:playingAbility_sarsa_alternate}
+
+\begin{tabular}{lrrr}
+\toprule
+Lernrate $\alpha$ &  Spielst"arke Sarsa & Spielst"arke Minimax & Differenz zu Minimax \\ \midrule
+Konstant 0,1                    & 6.495,50 $\pm$ 826,74             & 6.917,86      & \textcolor{red}{-422,36 $\pm$ 826,74} \\
+Konstant 0,2                    & 7.018,94 $\pm$ 299,04             & 6.917,86      & 101,08 $\pm$ 299,04 \\
+Abnehmend 1 $\rightarrow$ 0,1   & 7.625,94 $\pm$ \phantom{0}65,10   & 6.917,86      & 708,08 $\pm$ \phantom{0}65,10 \\ \bottomrule
+
+\end{tabular}
+
+\end{table}

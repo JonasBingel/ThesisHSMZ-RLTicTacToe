@@ -1,0 +1,45 @@
+\chapter{Konklusion}
+In den folgenden Abschnitten werden der Inhalt der Bachelorarbeit und die Ergebnisse der Implementierung für \ac{TTT} zusammengefasst.
+Anschließend werden diese kritisch betrachtet bevor ein Ausblick für mögliche weitere Arbeiten gegeben wird.
+
+\section{Zusammenfassung}
+In dieser Bachelorarbeit wurden \acl{RL} und die zugehörigen Methoden zur Lösung sequenzieller Entscheidungsprobleme erklärt. 
+Der Fokus lag auf dem Teilgebiet des Temporal-Difference Learning und den zugehörigen Algorithmen \bothAlgs.
+Die Funktionsweise der Algorithmen wurde erklärt und deren Gemeinsamkeiten sowie Unterschiede aufgezeigt. 
+Zur weiteren Untersuchung der Algorithmen und deren Hyperparametern wurden beide für das simple Strategiespiel \acl{TTT} in Java implementiert. 
+Untersucht wurden verschiedene Ausprägungen der Lernrate $\alpha$, die im Rahmen von Vorexperimenten festgelegt wurden. 
+Zudem wurden die Agenten mit zwei verschiedenen Arten von \splay trainiert. 
+Zusätzlich wurde das Konzept der Afterstates in Form einer \wtable implementiert. 
+Eine mögliche Definition einer Rewardfunktion wurde erläutert und zum Training der Agenten sowie der Quantifizierung der Spielstärke verwendet. 
+Zur Auswertung der trainierten Agenten wurde deren Konvergenz während des Trainings sowie deren Spielstärke gegen einen Minimax-Algorithmus und Spieler mit Zufallstrategie erfasst und verglichen. 
+Beide Algorithmen erreichten mit der gleichen Hyperparameterkombination und Nutzung von Afterstates die jeweils besten Agenten, die eine höhere Spielstärke besitzen als der Minimax-Algorithmus. 
+Die Auswertung ergab, dass \qlearning im Durchschnitt schneller konvergiert und eine höhere Spielstärke erreicht als \sarsa. 
+Verwendet \sarsa keine Afterstates konnten leichte Schwächen für das Symbol O festgestellt werden. 
+Beide Agenten bewerteten die \gqq{Mitte} als beste erste Aktion, was konsistent zu anderen Experimenten ist.
+
+\section{Kritische Betrachtung der Inhalte}
+In der Arbeit wird ein klassischer Minimax-Algorithmus verwendet. 
+Zum einen dient die berechnete Spielstärke des Minimax-Algorithmus als Vergleichsmaßstab bei der Bewertung der Agenten. 
+Zum anderen basiert die Konvergenzmetrik auf den Aktionen, die laut des Minimax-Algorithmus optimal sind. 
+Wie in \cref{sec:anwendbare_algorithmen} erwähnt, wählt der Agent nicht immer die optimale Aktion, da der Minimax-Algorithmus von einem optimalen Gegner ausgeht. 
+Dadurch ist dessen Gewinnrate kleiner, als die optimal mögliche, weil nicht zwischen Aktionen unterschieden wird, die mehr Gewinnchancen haben als andere, wenn das Ergebnis gegen einen optimalen Gegner gleich ist. 
+Für die Bewertung der Spielstärke und richtige Rate optimaler Aktionen gemäß \splay sollte daher ein angepasster Minimax-Algorithmus genutzt werden.
+
+Ein weiterer Aspekt ist die Verbesserung des jeweils optimalen Agenten durch das Konzept der Afterstates in Form der \wtable. Relativ zur Spielstärke ist die erzielte Verbesserung klein, sodass nicht gesagt werden kann, ob diese Verbesserung nur durch Zufall entstanden ist oder wirklich auf den \wtable zurückgeführt werden kann. Da wegen der Zeitbeschränkung nur fünf Agenten trainiert wurden, ist die Stichprobe zu gering für einen Signifikanztest. Um den Wert zu stabilisieren, sollten daher mehr Agenten trainiert werden.
+
+Eine weitere Limitierung besteht in der Menge der getesteten Hyperparameterkombinationen und Methoden, wie diese während des Trainings reduziert werden können. Durch Vorexperimente wurde versucht diese möglichst sinnvoll zu wählen, aber es kann nicht ausgeschlossen werden, dass mit anderen Werten stärkere Ergebnisse möglich sind.
+
+\section{Anmerkungen f"ur k"unftige Arbeiten}
+Wie im obigen Abschnitt angemerkt, liegt eine mögliche Verbesserung in der Evaluation durch den Minimax-Algorithmus.
+Um dies zu erreichen könnte ein Spieler implementiert werden, der die im Expert Play formulierten Regeln genau befolgt. 
+Eine weitere Möglichkeit ist die Erweiterung des bestehenden Minimax-Algorithmus, sodass zur Bewertung der Aktionen neben dem zu erwartenden Reward auch die Anzahl potenzieller Gewinnmöglichkeiten genutzt wird.
+Haben zwei Aktionen einen gleich hohen Reward, wird die Aktion als optimal deklariert, die mehr Gewinnmöglichkeiten für den Agenten bietet.
+Neben der Verbesserung der Evaluation, könnte es lohnend sein die implementierten Standardversionen der Algorithmen mit abgewandelten Formen wie Double \qlearning, Expected \sarsa \cite[S. 133ff.]{suttonReinforcementLearningIntroduction2018}, \cite{littmanMarkovGamesFramework1994} oder neuronalen Netzen \cite{konenParameterSelection2008} zu vergleichen  . 
+Zudem wäre ein Vergleich mit Algorithmen interessant, die im Gegensatz zu den implementierten Algorithmen für Multi-Agenten \ac{RL} vorgesehen sind. 
+Insbesondere sogenannte Equilibrium Learners wären gut geeignet, da diese sich auf Nullsummenspiele wie \ac{TTT} fokussieren. \cite[S. 39]{netoSingleAgentMultiAgentReinforcement} 
+Außerdem gibt es neben dem Konzept der Afterstates weitere Möglichkeiten, um die Lerndaten effektiver zu nutzen wie z.B. Eligibility Traces \cite{singhReinforcementLearningReplacing1996} oder die generelle Reduktion des Zustandsraums durch bessere Enkodierung. 
+Letzteres ist im Falle von \ac {TTT} besonders interessant, da es für jeden Zustand bis zu acht weitere äquivalente Zustände geben kann.
+
+\vspace{1cm}
+\textbf{Wörterzählung}: 12.614 Worte
+

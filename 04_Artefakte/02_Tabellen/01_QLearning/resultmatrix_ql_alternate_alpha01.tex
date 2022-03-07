@@ -1,0 +1,16 @@
+\begin{table}[ht]
+\centering
+\caption[Spielergebnismatrix \qlearning: $\alpha=0,1$, alternierendes \splay]{Spielergebnismatrix für \qlearning mit Lernrate $\alpha=0,1$, alternierendes \splay}
+\label{tab:resultmatrix_ql_alternate_alpha01}
+
+\begin{tabular}{llrlr}
+\toprule
+ & \multicolumn{2}{l}{\textbf{Minimax}} & \multicolumn{2}{l}{\textbf{Random}} \\ \midrule
+\textbf{X Q-Learning}   & X Q-Learning:     & 0,00\% $\pm$    0,00\%            & X Q-Learning:         & 95,12\% $\pm$ 1,75\%  \\
+                        & O Minimax:        & 0,00\% $\pm$    0,00\%            & O Random:             & 0,22\% $\pm$  0,16\%  \\
+                        & Unentschieden:    & 100,00\% $\pm$  0,00\%            & Unentschieden:        & 4,66\% $\pm$  1,64\%  \\ \cmidrule{2-5}
+\textbf{O Q-Learning}   & X Minimax:        & 0,00\% $\pm$    0,00\%            & X Random:             & 0,96\% $\pm$  0,50\%  \\
+                        & O Q-Learning:     & 0,00\% $\pm$    0,00\%            & O Q-Learning:         & 81,96\% $\pm$ 2,49\%  \\
+                        & Unentschieden:    & 100,00\% $\pm$  0,00\%            & Unentschieden:        & 17,08\% $\pm$ 2,59\%  \\ \bottomrule
+\end{tabular}
+\end{table}

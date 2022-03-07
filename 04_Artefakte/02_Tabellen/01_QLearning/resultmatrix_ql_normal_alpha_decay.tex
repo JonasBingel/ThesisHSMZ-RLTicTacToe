@@ -1,0 +1,16 @@
+\begin{table}[h]
+\centering
+\caption[Spielergebnismatrix \qlearning: abnehmende Lernrate, klassisches \splay]{Spielergebnismatrix für \qlearning mit abnehmender Lernrate, klassisches \splay}
+\label{tab:resultmatrix_ql_normal_alpha_decay}
+
+\begin{tabular}{llrlr}
+\toprule
+ & \multicolumn{2}{l}{\textbf{Minimax}} & \multicolumn{2}{l}{\textbf{Random}} \\ \midrule
+\textbf{X Q-Learning}   & X Q-Learning:     & 0,00\% $\pm$    0,00\%            & X Q-Learning:         & 98,91\% $\pm$ 0,24\%  \\
+                        & O Minimax:        & 0,00\% $\pm$    0,00\%            & O Random:             & 0,00\% $\pm$  0,00\%  \\
+                        & Unentschieden:    & 100,00\% $\pm$  0,00\%            & Unentschieden:        & 1,09\% $\pm$  0,24\%  \\ \cmidrule{2-5}
+\textbf{O Q-Learning}   & X Minimax:        & 0,00\% $\pm$    0,00\%            & X Random:             & 0,00\% $\pm$  0,00\%  \\
+                        & O Q-Learning:     & 0,00\% $\pm$    0,00\%            & O Q-Learning:         & 91,49\% $\pm$ 0,35\%  \\
+                        & Unentschieden:    & 100,00\% $\pm$  0,00\%            & Unentschieden:        & 8,51\% $\pm$  0,35\%  \\ \bottomrule
+\end{tabular}
+\end{table}

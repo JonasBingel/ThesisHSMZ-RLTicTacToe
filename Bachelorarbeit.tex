@@ -1,0 +1,69 @@
+\documentclass[
+ngerman, % neue Deutsche Rechtschreibung
+headings=normal, % normale Headings
+captions=tableheading, % places caption above tables
+listof=totoc,
+bibliography=totoc,
+final
+%usegeometry, % Auskommentieren wenn Package geometery verwendet wird
+%DEBUGGING
+%draft, % entfernen nach abschluss der bearbeitung
+%overfullrule, % entfernen nach abschluss der bearbeitung
+% Default Values
+%oneside, % Einseitige Seitengenerierung
+%11pt, % Font size
+% a4paper, % paper
+]{scrreprt}
+\KOMAoptions{%
+  DIV=12,
+  parskip=half*,
+% %BCOR=korrektur, % absoluter Wert der Bindekorrektur
+}
+
+\include{00_Allgemein/Metadaten}
+\include{00_Allgemein/Packages}
+\include{00_Allgemein/Befehle}
+
+% Typesetting options
+
+\widowpenalty=10000     % Hurenkinder
+\clubpenalty=10000      % Schusterjungen
+
+\addbibresource{zotero.bib}
+%\nocite{*} % TODO entfernen nur zum draften
+\newcounter{romanConsecutive}
+
+\begin{document}
+\include{00_Allgemein/ToDo}
+
+\pagestyle{empty}
+\renewcommand*{\chapterpagestyle}{empty}
+%\include{01_Vortext/01_Sperrvermerk}
+\include{01_Vortext/02_Titelseite}
+\include{01_Vortext/03_Erklaerung}
+\include{01_Vortext/04_ManagementSummary}
+
+\pagestyle{plain}
+\renewcommand*{\chapterpagestyle}{plain}
+\pagenumbering{Roman}
+\include{01_Vortext/05_Verzeichnisse}
+\include{00_Allgemein/Nomenklatur}
+
+\setcounter{romanConsecutive}{\value{page}}
+\pagenumbering{arabic}
+\include{02_Textteil/01_Einleitung}
+\include{02_Textteil/02_Grundlagen}
+\include{02_Textteil/03_Methodik}
+\include{02_Textteil/04_Implementierung}
+\include{02_Textteil/05_Auswertung}
+\include{02_Textteil/06_Fazit}
+\pagenumbering{Roman}
+
+\setcounter{page}{\value{romanConsecutive}}
+\printbibliography[title={Literaturverzeichnis}]
+\include{03_Nachtext/01_Anhang}
+
+\usestandardtocs
+\bookmarksetup{startatroot}% siehe bookmark-Anleitung
+
+\end{document}

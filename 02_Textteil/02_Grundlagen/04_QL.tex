@@ -1,0 +1,22 @@
+\subsection{\qlearning}
+Q-Learning lernt ebenfalls die optimale Policy durch Schätzung der Action-Value Funktion. 
+Im Gegensatz zu Sarsa approximiert Q-Learning jedoch direkt die optimale Action-Value Funktion $q_*$ und somit die optimale Policy $\pi_*$.
+Dafür nutzt Q-Learning bei der Aktualisierung seines Schätzwertes $Q(S_t,A_t)$ immer die Aktion $a$ des Folgezustands $S_{t+1}$, die den maximalen $Q$-Value hat.   
+Dies ist  unabhängig davon welche Aktion $A_{t+1}$ der Agent schlussendlich ausführt.  \cite[S. 177]{watkinsLearningDelayedRewards1989} 
+Das Update für Q-Learning kann daher wie in \cref{eq:ql_update} formuliert werden\cite[S. 131]{suttonReinforcementLearningIntroduction2018}.
+
+\begin{equation}
+    \label{eq:ql_update}
+    \equationentry{TD Update Sarsa}
+    Q(S_t,A_t)\leftarrow Q(S_t,A_t)+\alpha[R_{t+1}+\gamma\max_aQ(S_{t+1},a)-Q(S_t,A_t)]
+\end{equation}
+
+Die Policy $\pi$, die zur Interaktion mit der Umgebung genutzt wird, ist jedoch dennoch wichtig, da sie entscheidet welche Samples der Agent erhält. 
+Da für die Aktualisierung jedoch immer der maximale Q-Value genutzt wird, ist eine Abnahme der Explorationswahrscheinlichkeit bei Nutzung von $\epsilon$-greedy keine Bedingung für die Konvergenz zur optimalen Policy \cite[S. 131f.]{suttonReinforcementLearningIntroduction2018}.
+Wenn die Konvergenzbedingungen von \ac{TD} Prediction eingehalten werden, ist Q-Learning garantiert zur optimalen Policy $\pi_*$ zu konvergieren \cite[S. 286]{watkinsQlearning1992}.
+
+Der Ablauf des Q-Learning Algorithmus ist als Pseudocode formuliert in Algorithmus \ref{algo_qlearning}.\footnote{eigene Darstellung in Anlehnung an \cite[S. 131]{suttonReinforcementLearningIntroduction2018}}
+
+\input{04_Artefakte/04_Algorithmen/pseudocode_qlearning}
+
+

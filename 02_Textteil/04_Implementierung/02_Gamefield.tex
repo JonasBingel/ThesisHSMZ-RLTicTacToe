@@ -1,0 +1,15 @@
+\section{Gamefield}
+Die Klasse Gamefield implementiert das Tic-Tac-Toe Spielfeld, wie es in \cref{chap:ttt_encoding} beschrieben wurde. 
+Gamefield verwaltet pro Symbol ein Bitboard. 
+Die Bitboards $B_X$ und $B_O$ wurden umgesetzt mittels der Java BitSet-Klasse, die einen Vektor von Bits verwaltet. 
+Zudem implementiert die BitSet-Klasse die klassischen Logikoperationen, sodass die beschriebene Methodik zur Erfassung der legalen Aktionen und Gewinnprüfung umgesetzt werden können. 
+
+In der Anwendung werden möglichen Aktionen und die Binärrepräsentation $B_{s}$ eines Zustands jeweils in einem int zur Basis 10 gespeichert.
+Der primitve Datentyp int umfasst 32 Bits und ist somit ausreichend, um die 18 Bit von $B_{s}$ zu verwalten.  \cref{listing:getState} zeigt die Berechnung von $B_{s}$ und somit die Implementierung der \cref{eq:bitboard_bs}. 
+Bevor die zu den Bitboards zugehörigen Zahlen addiert werden, erhält $B_X$ mittels LSHIFT den beschriebenen Offset von 9 Bit, d.h. der Spielfeldgröße, damit keine Überschneidung von $B_X$ und $B_O$ auftritt.
+
+\begin{listing}[h]
+\caption{getState-Methode zur Berechnung von $B_S$}
+\label{listing:getState}
+\inputminted{java}{04_Artefakte/03_Listings/getState.java}
+\end{listing}

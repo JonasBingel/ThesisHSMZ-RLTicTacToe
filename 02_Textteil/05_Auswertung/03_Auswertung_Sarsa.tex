@@ -1,0 +1,122 @@
+\section{Auswertung des \sarsa Agenten}
+In den folgenden Abschnitten werden die Ergebnisse der Sarsa Agenten vorgestellt und ausgewertet. Zunächst wird die Konvergenz während dem Training und die Spielstärke betrachtet. Anschließend wird vorgestellt, welche Auswirkung die Nutzung von Afterstates hat. Abschließend erfolgt eine Detailbetrachtung für ausgewählte Zustände.
+\subsection{Konvergenz der Rate optimaler Aktionen}
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_alpha_sarsa_X.pdf}
+   \caption{Symbol X}
+   \label{fig:convergence_compare_alpha_sarsa_X} 
+\end{subfigure}
+
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_alpha_sarsa_O.pdf}
+   \caption{Symbol O}
+   \label{fig:convergence_compare_alpha_sarsa_O}
+\end{subfigure}
+
+\caption[Rate optimaler Aktionen \sarsa unterschiedliche Lernraten, klassisches \splay]{Rate optimaler Aktionen von \sarsa für verschiedene Lernraten $\alpha$, klassisches \splay (a) Symbol X (b) Symbol O}
+\label{fig:convergence_compare_alpha_sarsa}
+\end{figure}
+
+\cref{fig:convergence_compare_alpha_sarsa} zeigt den Verlauf der Rate optimaler Aktionen von \sarsa Agenten mit den drei verschiedenen Lernraten $\alpha$ während des Trainings mit klassischem \splay. 
+Der Agent mit Lernrate $\alpha=0,1$ konvergiert am schnellsten, dicht gefolgt von $\alpha=0,2$. 
+Für das Symbol X stabilisiert sich die Rate ab ungefähr 90.000 und für O ab 110.000 Trainingsepisoden. 
+
+Die Agenten von Symbol X stabilisieren sich auf einer höheren Rate optimaler Aktionen als die von Symbol O, wobei in beiden Fällen der Agent mit $\alpha=0,1$ die höchste Rate erreicht. 
+Hingegen konvergiert bei beiden Symbolen der Agent mit abnehmender Lernrate langsamer und erreicht, insbesondere bei Symbol O, eine niedrigere Rate optimaler Aktionen.
+
+Der Vergleich der Rate optimaler Aktionen von \sarsa für alternierendes \splay ist im \cref{chap:app_sarsa}. 
+Für beide Symbole konvergiert das alternierende \splay langsamer als das klassische \splay und stabilisiert sich auf einer geringeren Rate.
+
+
+\subsection{Spielstärke}
+\cref{tab:playingAbility_sarsa_normal} und \cref{tab:playingAbility_sarsa_alternate} zeigen die durchschnittliche Spielstärke der trainierten Agenten für klassisches und alternierendes \splay. Für beide Arten von \splay erreichen die Agenten eine durchschnittliche Spielstärke, die über der des Minimax liegt. 
+Die einzige Ausnahme sind Agenten, die mit konstanter Lernrate $\alpha=0,1$ durch alternierendes \splay trainiert wurden und eine durchschnittliche Spielstärke von 6.496,50 haben. 
+Training durch klassisches \splay resultiert für \sarsa in stärkeren Agenten als Training durch alternierendes \splay. 
+Der \sarsa Agent, der die Lernrate $\alpha=0,1$ nutzt und mit klassischem \splay trainiert wurde erreicht mit 7.905,72 die höchste Spielstärke. 
+
+\cref{tab:resultmatrix_sarsa_normal_alpha01} enthält die Spielergebnisse der Evaluationsspiele des stärksten \sarsa Agenten. 
+Als Symbol X spielt der \sarsa Agent optimal gegen Minimax. 
+Zudem gewinnt der Agent 99\% der Spiele gegen Random und somit mehr als der Minimax, der nur 97\% gewinnt. 
+Als Symbol O gewinnt der Agent mit 89\% mehr Spiele gegen Random als Minimax, der nur eine Gewinnrate von 78\% erreicht.
+Jedoch verliert der Agent als Symbol O 0,74\% der Evaluationsspiele gegen Minimax und 0,11\% gegen Random.
+Somit erreicht der Agent eine höhere Spielstärke als Minimax, spielt jedoch nicht optimal. 
+Die Spielergebnismatrizen der \sarsa Agenten für die anderen Hyperparameter und Arten von \splay sind im \cref{chap:app_sarsa} angegeben.
+
+\input{04_Artefakte/02_Tabellen/02_Sarsa/playingAbility_sarsa_normal}
+\input{04_Artefakte/02_Tabellen/02_Sarsa/playingAbility_sarsa_alternate}
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_normal_alpha01}
+
+\subsection{\wtable}
+\cref{fig:convergence_compare_experience_sarsa} vergleicht die Rate optimaler Aktionen des besten \sarsa Agenten mit \qtable und \wtable. 
+Sowohl für Symbol X als auch für Symbol O konvergiert der Agent mit \wtable schneller und erreicht eine höhere Rate. 
+
+\cref{tab:resultmatrix_sarsa_normal_alpha01_afterstate} zeigt die Spielergebnismatrix des \sarsa Agenten mit \wtable. 
+Im Gegensatz zum Agenten mit \qtable verliert der Agent keine Spiele mehr und spielt optimal gegen Minimax. 
+Die Gewinnrate gegen Random bleibt für das Symbol X unverändert bei 99\%. 
+Für das Symbol O sinkt die Gewinnrate von 89,69\% auf 88,61\%. 
+Die durchschnittliche Spielstärke des Agenten steigt durch die Nutzung des \wtable von 7.905,72 auf 7.927,68.
+Da die Standardabweichung für die Spielstärke des Agenten mit \qtable jedoch $\pm 30,03$ beträgt und die Stichprobenanzahl mit $N=5$ klein ist, kann dies nicht sicher gesagt werden.
+Es ist daher auch möglich, dass die Verbesserung durch Zufall entstanden somit statistisch nicht signifikant ist.
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_experience_sarsa_X.pdf}
+   \caption{Symbol X}
+   \label{fig:convergence_compare_experience_sarsa_X} 
+\end{subfigure}
+
+\begin{subfigure}[b]{0.75\textwidth}
+    \centering
+   \includegraphics[width=1\linewidth]{convergence/convergence_compare_experience_sarsa_O.pdf}
+   \caption{Symbol O}
+   \label{fig:convergence_compare_experience_sarsa_O}
+\end{subfigure}
+\caption[Rate optimaler Aktionen bester \sarsa Agent, \wtable, klassisches \splay]{Rate optimaler Aktionen von \sarsa Lernrate $\alpha=0,1$, \wtable, klassisches \splay (a) Symbol X (b) Symbol O}
+\label{fig:convergence_compare_experience_sarsa}
+\end{figure}
+
+\input{04_Artefakte/02_Tabellen/02_Sarsa/resultmatrix_sarsa_normal_alpha01_afterstate}
+
+\subsection{Detailbetrachtung}
+Obwohl die Spielstärke der trainierten \sarsa Agenten über dem Minimax liegt, verliert der beste Agent mit \qtable als Symbol O. 
+Ein Zustand, der in den Evaluationsspielen mehrfach für eine Niederlage als Symbol O sorgte ist $69648$, der in \cref{ttt_boards/ttt_69648} dargestellt ist. 
+Die optimalen Aktionen laut Minimax und Expert Play sind 0, 6 und 8, um den Gegner zum Blocken zu zwingen. 
+Der Agent mit \qtable wählt jedoch gemäß Greedy-Strategie die nicht optimale Aktion 5, da diese nach Abschluss des Trainings den höchsten \qValue hat. 
+Die \qtable zeigt jedoch, dass die optimalen Aktionen im Vergleich zu den anderen Aktionen die höheren \qValues haben. 
+Lediglich der \qValue für die Aktion 5 ist leicht höher. 
+Der Agent benötigt demnach noch mehr Trainingsepisoden, um den Aktionen die richtige Bewertung zuzuweisen. 
+Dies bestätigt sich, wenn der \sarsa Agent mit der \wtable trainiert wird, um die gesammelte Erfahrung effektiver zu nutzen.  
+Durch Nutzung der \wtable ändert sich die Bewertung der Aktionen und die optimalen Aktionen 0, 6 und 8 haben nun die höchsten \qValues.
+
+\begin{minipage}{\textwidth}
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering
+    \captionsetup{type=figure}
+    \captionof{figure}{Spielfeldkonstellation Zustand 69648}
+    \label{ttt_boards/ttt_69648}
+    \includegraphics[]{ttt_boards/ttt_69648.pdf}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering
+    \captionsetup{type=table}
+    \captionof{table}{Bewertung Aktionen in Zustand 69648}
+    \label{tab:state69648}
+    \input{04_Artefakte/02_Tabellen/02_Sarsa/state69648_evaluation_sarsa}
+    \end{minipage}
+\end{minipage}
+
+Zur Prüfung welche Aktion laut den trainierten \sarsa Agenten die beste erste Aktion für Symbol X ist, wird die durchschnittliche Bewertung von fünf Agenten betrachtet, die in \cref{tab:state0_eval_sarsa} gelistet sind. 
+Alle Aktionen, mit Ausnahme der Aktion 4, haben ein negatives Vorzeichen.
+Wie die obige Auswertung der Spielstärke der \wtable Agenten zeigt, behindert dies jedoch nicht die Spielstärke des Agenten, da bei der Aktionsauswahl lediglich die Aktion mit dem höchsten \qValue gewählt wird. 
+In \cref{tab:state0_eval_sarsa_aggregated} wird die durchschnittliche Bewertung je äquivalenter Aktion betrachtet.
+Laut den trainierten Sarsa Agenten ist die Rangfolge der Aktionen: Mitte, Ecke und Kante. 
+
+\input{04_Artefakte/02_Tabellen/02_Sarsa/state0_evaluation_sarsa}

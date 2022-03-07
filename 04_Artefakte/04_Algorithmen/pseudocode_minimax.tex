@@ -1,0 +1,32 @@
+{\centering
+\begin{minipage}{0.60\textwidth}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwFunction{KwMinimax}{Minimax}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\KwMinimax{NODE, PLAYER}}{
+    \uIf{NODE is terminal}{
+        \KwRet{utility assigned to NODE}
+    }
+    \uElseIf{PLAYER is maximizing player MAX}{
+        \ForEach{child of NODE}{
+            \KwMinimax{CHILD, MIN}\;
+        }
+        \KwRet{maximal CHILD utility}
+    }
+    \Else{
+        \ForEach{child of NODE}{
+            \KwMinimax{CHILD, MAX}\;
+        }
+        \KwRet{minimal CHILD utility}
+    }
+}
+\textbf{end function}
+
+\caption{Pseudocode Minimax-Algorithmus}
+\label{algo_minimax}
+\end{algorithm}
+\end{minipage}
+\par
+}

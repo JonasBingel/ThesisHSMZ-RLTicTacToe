@@ -1,0 +1,21 @@
+\section{Beantwortung der Forschungsfragen}
+Mit den vorgestellten Ergebnissen können die Forschungsfragen aus \cref{sec:forschungsfragen} wie folgt beantwortet werden:
+
+\textbf{Frage:} Können die Algorithmen Expert Play in \acl{TTT} durch \splay erlernen? \\ \textbf{Antwort:} Die mit den Algorithmen trainierten Agenten spielen besser als der implementierte Minimax-Algorithmus. In den betrachteten Zuständen, zeigten die Agenten Entscheidungen, die mit dem Expert Play konsistent sind. Zur abschließenden Beantwortung ist eine Implementierung der Regeln des Expert Play notwendig, um die Aktionswahl der Agenten zu evaluieren. Die Art des \splay ist entscheidend auf den Trainingserfolg, da beide Agenten mit alternierendem \splay schlechtere Ergebnisse erzielten. Dabei litt Q-Learning unter \splay deutlich mehr als \sarsa. Die erreichte Spielstärke des Q-Learning Agenten ist konsistent mit Experimenten in \cite{mirnovi.QLearningTicTacToe2020}.
+
+\textbf{Frage:} Eine Abschätzung für die Anzahl der Trainingsepisoden, die  ungefähr benötigt werden, um Expert Play in \ac{TTT} durch Self-play zu erlernen? \\ \textbf{Antwort:} In den Vorexperimenten wurde festgestellt, dass mehr als 100.000 Trainingsepisoden notwendig sind, um stabile Ergebnisse zu erhalten. Für die Experimente wurden 150.000 Episoden verwendet, in denen die Agenten Expert Play erlernt haben. Die Auswertung der Konvergenz zeigt zudem, dass Symbol X deutlich schneller konvergiert als Symbol O.
+
+\textbf{Frage:} Welche Auswirkung hat die Verwendung des Konzepts der Afterstates auf das Konvergenzverhalten und Spielstärke der Agenten? \\ \textbf{Antwort:} Durch die Verwendung von Afterstates in Form einer \wtable konnte die Konvergenz und Spielstärke verbessert werden. Die Verbesserungen sind jedoch in Relation zur Standardabweichung gering. Da nur eine Stichprobe von $N=5$ vorliegt, kann nicht abschließend gesagt werden, ob die leichte Verbesserung auf die Nutzung von Afterstates oder Zufall zurückzuführen ist. 
+
+\textbf{Frage:} Was sind die besten Hyperparameter für \bothAlgs? \\ \textbf{Antwort:} Aus der Menge der untersuchten Hyperparameter, erreichten \bothAlgs die besten Ergebnisse, durch folgende Kombination von Hyperparametern:
+\begin{itemize}
+    \item konstante Lernrate $\alpha=0,1$, 
+    \item abnehmende Explorationswahrscheinlichkeit $\epsilon = 1 \rightarrow 0,1$ die nach 2/3 der Trainingsepisoden 0,1 erreicht
+    \item Verwendung von Afterstates in Form einer \wtable
+\end{itemize}
+
+\textbf{Frage:} Wie unterscheiden sich \bothAlgs hinsichtlich ihrer Konvergenz? \\ \textbf{Antwort:} Q-Learning konvergiert schneller als \sarsa und erreicht eine höhere Rate optimaler Aktionen.
+
+\textbf{Frage:} Welcher Agent erreicht eine bessere Spielstärke, wenn beide RL Agenten mit ihren optimalen Hyperparametern trainiert werden? \\ \textbf{Antwort:} Q-Learning erreicht eine bessere Spielstärke. Wird die Rewardfunktion aus \cref{sec:TDL_TTT} verwendet, lässt sich die Spielstärke quantifizieren. Für Q-Learning beträgt diese im Durchschnitt 8036,68 und für \sarsa 7927,68. Dabei scheint Q-Learning nahezu die maximal mögliche optimale Spielstärke zu erreichen, die auch in mindestens einem anderen Experiment \cite{mirnovi.QLearningTicTacToe2020} gezeigt wurde.
+
+\textbf{Frage:} Was ist aus Sicht der Agenten die optimale erste Aktion? \\ \textbf{Antwort:} \bothAlgs bewerten beide die Aktion \gqq{Mitte} als stärkste erste Aktion für X. Die zweitstärkste Aktion ist das Platzieren eines Symbols in einer der Ecken. Jedoch werden äquivalente Aktionen nicht gemeinsam bewertet, sodass die Frage nicht abschließend beantwortet werden kann. Dass die Mitte, die beste Aktion sein soll, ist jedoch konsistent mit Experimenten, die vorher durchgeführt wurden \cite{kutscheraa.BestOpeningMove2018}. 

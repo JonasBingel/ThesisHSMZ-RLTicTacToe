@@ -1,0 +1,52 @@
+\section{Trainingsaufbau der Agenten}
+In den folgenden Abschnitten wird der verwendete Trainingsaufbau erklärt. 
+Dies umfasst die Arten von \splay sowie die Auswahl der Hyperparameter, die untersucht werden.
+Abschließend werden die genutzten Metriken vorgestellt.
+
+\subsection{\splay}
+Zum Training spielt ein Agent wiederholt gegen Gegner. 
+Die Spielstärke der Gegner sollte vergleichbar mit der des Agenten sein und während des Trainings steigen \cite[S.1 ff.]{epsteinIdealTrainer1994}.
+Da die Bereitstellung unterschiedlicher Gegner ansteigender Spielstärke für komplexere Strategiespiele nicht praktikabel ist, gibt es das Konzept des \splay. \cite[S. 565f.]{szitaReinforcementLearningGames2012} \cite[S. 1ff.]{digiovanniSurveySelfPlayReinforcement2021}
+Im \splay lernt der  Agent das Spiel, indem er gegen eine Kopie von sich selbst spielt. 
+Dadurch wird stetig gegen einen Gegner gleicher Stärke gespielt, ohne dass dieser zusätzlich implementiert werden muss \cite[S. 565f.]{szitaReinforcementLearningGames2012}.
+Jedoch hat \splay das Problem, das beide Agenten gleichzeitig lernen und in lokalen Maxima stecken bleiben können. 
+Dies hat zur Folge, dass das Lernen unvollständig ist und die Agenten frühzeitig mit dem Lernen aufhören und den Zustandsraum nicht ausreichend erkunden. \cite[S. 16]{boyanModularNeuralNetworks1992}, \cite[S. 565f.]{szitaReinforcementLearningGames2012}, \cite{bowlingConvergenceNoRegretMultiagent2004}
+
+Eine Möglichkeit den Zustandsraum repräsentativer zu proben, ist die Agenten abwechselnd lernen zu lassen. 
+Während ein Agent lernt, nutzt der andere seine derzeitige  greedy Policy\footnote{Hyperparameter werden entsprechend gesetzt: $\alpha = \epsilon = 0$}.
+Nach einer festen Anzahl von Episoden, die im Folgenden Batch genannt werden, wechseln die Rollen. \cite{slatern.GameAiWhy} 
+Dies wird wiederholt, bis die Trainingsepisodenanzahl erreicht wurde, wie im Algorithmus \ref{algo_selfplay} dargestellt.
+Da zu Beginn des Trainings der Agent das Spiel nicht kennt, spielt der lernende Agent im ersten Batch gegen einen Spieler mit Zufallsstrategie. 
+
+Im Rahmen der Bachelorarbeit werden das klassische \splay und das beschriebene \splay mit alternierenden Rollen für \ttt implementiert und in der Auswertung verglichen. 
+Aufgrund von Vorexperimenten wird festgelegt, dass in beiden Fällen zum Training 150.000 Episoden gespielt werden. Ein Batch beim alternierendem \splay umfasst 100 Episoden.
+
+\input{04_Artefakte/04_Algorithmen/pseudocode_selfplay}
+
+\subsection{Auswahl der Hyperparameter}
+\label{sec:hyperparameter}
+Die Hyperparameter können entweder konstant sein oder im Verlauf des Trainings abnehmen. 
+Zur Komplexitätsreduktion wird für die Verkleinerung von Hyperparametern nur eine Methode genutzt.
+Diese Methode zur degressiven Abnahme wird als Step-Based bezeichnet und ist durch folgende Formel für einen beispielhaften Parameter $\eta$ definiert \cite[S. 3]{parkNovelLearningRate2020} :
+
+\begin{equation}\label{eq:Eq3}\equationentry{Step-Based Parameterabnahme}
+   \eta(x) = \eta_{start}(\frac{\eta_{end}}{\eta_{start}})^{\frac{x}{x_{max}}}
+\end{equation}
+
+Der Parameter $\eta$  hat in der ersten Episode ($x=0$) den Wert $\eta_{start}$ und in der Episode $x_{max}$ den Wert $\eta_{end}$. 
+Mit steigender Episode $x$ wird die Anpassung zunehmend kleiner. 
+Zur weiteren Komplexitätsreduktion wird nur eine kleine Untermenge möglicher Parameterkombinationen untersucht, die durch Vorexperimente ausgewählt wurden. 
+
+Als Diskontierungsfaktor $\gamma$ wird $1$ verwendet, da \acs{TTT} ein endliches Spiel und die Diskontierung somit nicht notwendig ist. 
+Da die Definition des optimalen Verhaltens bereits durch den Reward erfolgt, wird $\gamma$ nicht weiter betrachtet.
+
+Die Lernrate $\alpha$ muss während des Trainings gemindert werden, um die Konvergenz der Algorithmen zu gewährleisten. 
+Jedoch wird diese Konvergenzbedingung nur selten in der Praxis eingehalten. 
+Zudem ist in nicht-stationären Umgebungen eine konstante (kleine) Lernrate zu bevorzugen. \cite[S. 33]{suttonReinforcementLearningIntroduction2018} 
+Da der Gegner vom Agent als Teil der Umgebung betrachtet wird und im klassischen \splay die Agenten gleichzeitig lernen, kann \acs{TTT} als nicht-stationäre Umgebung aufgefasst werden.  
+In Vorexperimenten zeigte sich, dass konstante $\alpha$  genutzt werden können, wenn $\alpha < 0.3$ gilt.
+Daher werden $\alpha=0,1$, $\alpha=0,2$ sowie ein $\alpha$, das zu Beginn $1$ ist und dann gegen $0.1$ konvergiert untersucht, 
+
+Der Explorationswahrscheinlichkeit $\epsilon$ muss so gewählt werden, dass möglichst alle \ac{SA Tupel} besucht werden.
+Insbesondere für \sarsa ist es jedoch notwendig, dass $\epsilon$ keinen konstant hohen Wert hat, damit Exploitation erfolgen kann. 
+Durch Vorexperimente wurde ermittelt, dass dies zuverlässig erfolgt, wenn zu Beginn $\epsilon = 1$ gilt und im Rahmen des Trainings abnimmt und nach zwei Drittel der Episoden $\epsilon = 0.1$ gilt.

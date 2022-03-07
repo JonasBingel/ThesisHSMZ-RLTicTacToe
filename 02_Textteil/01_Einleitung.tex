@@ -1,0 +1,52 @@
+\chapter{Einleitung}
+\section{Motivation}
+Ein zentrales Teilgebiet Künstlicher Intelligenz ist \ac{ML}, das sich mit Methoden befasst, um Computer aus Erfahrungen, in Form von Trainingsdaten, lernen zu lassen \cite[S. 178]{ertelIntroductionArtificialIntelligence2017}, \cite[S. 524]{russellArtificialIntelligenceModern2021}. 
+Jedoch ist es bei interaktiven Anwendungen nicht praktikabel repr"asentative Trainingsdaten für alle Situationen zu erhalten oder die korrekte Entscheidung ist nicht bekannt \cite[S. 24]{suttonReinforcementLearningIntroduction2018}.  
+Zudem sind Entscheidungen oft sequenziell und gegebenenfalls muss die Entscheidung getroffen werden auf eine direkte Belohnung zu verzichten, um später eine größere Belohnung zu erhalten \cite[S. 1]{vanderreeReinforcementLearningGame2013}. 
+
+\ac{RL} ist das Teilgebiet von \ac{ML} das sich mit der Erstellung von Agenten beschäftigt, die sequenziell Entscheidungen treffen, um einen Gesamtgewinn zu maximieren \cite[S. 1]{vanderreeReinforcementLearningGame2013}, \cite[S. 1]{suttonReinforcementLearningIntroduction2018}.  
+Dafür interagiert ein Agent mit seiner Umgebung (\engl Environment), um Erfahrungen zu sammeln und aus diesen, ohne zusätzlich eingebrachtes Wissen zu lernen. 
+Aufgrund dieser Eigenschaft ist \ac{RL} das Teilgebiet von \ac{ML}, das dem menschlichen Lernen am nächsten ist. \cite[S. 4]{suttonReinforcementLearningIntroduction2018}
+
+Zu einer Anwendung und Evaluation von \ac{RL} Algorithmen eigenen sich (Strategie-)spiele, insbesondere wegen des sequenziellen Aufbaus, klar definierten Umgebung und der Reproduzierbarkeit \cite[S. 1]{vanderreeReinforcementLearningGame2013}.
+Beispielsweise wurden in \cite{tesauroTemporalDifferenceLearning1992a} und \cite{vanderreeReinforcementLearningGame2013} für die Spiele Backgammon und Othello \ac{RL} Agenten trainiert, die allein durch \splay eine hohe Spielstärke erreichen. 
+Beim \splay spielt ein Agent zum Training nur gegen sich selbst und erhält kein externes Wissen. 
+Externes Wissen könnte beispielsweise bereitgestellt werden in Form von Expert Play, d.h. Gegnern, die optimalen Spielstrategien folgen und so auf Experten-Niveau spielen \cite[S. 561]{szitaReinforcementLearningGames2012}. 
+In beiden Beispielen wurden Algorithmen aus dem \ac{RL} Teilbereich des \ac{TDL} verwendet. 
+Zwei richtungsweisende und verbreitete \ac{TDL} Algorithmen sind \qlearning und \sarsa, die eng miteinander verwandt sind \cite[S. 138]{suttonReinforcementLearningIntroduction2018}, \cite[S. 1]{vanderreeReinforcementLearningGame2013}, \cite[S. 1]{samsudenReviewPaperImplementing2019}.
+
+In der vorliegenden Arbeit soll das simple Strategiespiel \ac{TTT} zur Evaluation dieser Algorithmen genutzt werden, das sich aufgrund verschiedener Aspekte dafür eignet. 
+Erstens ist \ac{TTT} ein simples und bekanntes Spiel und dadurch ein anschauliches Beispiel \cite[S. 6]{allisSearchingSolutionsGames1994}. 
+Zweitens ist \ac{TTT} ein gelöstes Spiel mit optimalen Strategien, was eine Evaluation der Agenten ermöglicht \cite[S. 533ff.]{crowleyFlexibleStrategyUse1993}.
+Drittens, besitzt \ac{TTT} einen diskreten und kleinen Zustands- sowie Aktionsraum, sodass Agenten schnell trainiert werden können \cite[S. 3]{block-berlitzm.ProInformatikFunktionaleProgrammierung2009}. 
+Außerdem können dieselben Spielzustände durch mehrere Spielabfolgen erreicht werden. 
+Dies ermöglicht eine Evaluation des Konzepts der Afterstates (dt. Folgezustände), das die gesammelte Erfahrung effektiver nutzen soll. \cite[S. 136f.]{suttonReinforcementLearningIntroduction2018}
+
+\section{Ziele und Forschungsfragen}
+\label{sec:forschungsfragen}
+Die vorliegende Arbeit verfolgt zwei zentrale Ziele. Zum einen die Erklärung der \ac{RL} Algorithmen \qlearning und \sarsa sowie die Erarbeitung von deren Unterschieden.
+Zum anderen die Anwendung und Evaluation der beiden Algorithmen am Beispiel des  Strategiespiels \ttt. 
+Die zentrale Forschungsfrage für das zweite Ziel ist, ob die beiden Algorithmen durch \splay eine hohe Spielstärke erreichen und optimale Spielstrategien bzw. Expert Play erlernen.
+Unter diese Forschungsfrage gliedern sich die folgenden weiteren Forschungsfragen:
+\begin{itemize}
+    \item Eine Abschätzung für die Anzahl der Trainingsepisoden, die  ungefähr benötigt werden, um Expert Play in \ac{TTT} durch Self-play zu erlernen?
+    \item Welche Auswirkung hat die Verwendung des Konzepts der Afterstates auf das Konvergenzverhalten und Spielstärke der Agenten?
+    \item Was sind die besten Hyperparameter für \bothAlgs?
+    \item Wie unterscheiden sich \bothAlgs hinsichtlich ihrer Konvergenz?
+    \item Welcher Agent erreicht eine bessere Spielstärke, wenn beide Algorithmen mit ihren optimalen Hyperparametern trainiert werden?
+    \item Was ist aus Sicht der Agenten die optimale erste Aktion?
+\end{itemize}
+
+\section{Aufbau der Arbeit}
+Die vorliegende Bachelorarbeit gliedert sich inklusive dieser Einleitung in sechs Kapitel. 
+Kapitel 2 dient der Darstellung der Grundlagen, die notwendig sind, um die Algorithmen \bothAlgs zu verstehen und auf \ac{TTT} anwenden und evaluieren zu können. 
+Dazu werden die Bestandteile von \ac{RL} und das zu implementierende Spiel erklärt und die beiden Algorithmen verglichen. 
+Kapitel 3 beschreibt die Methodik und Anwendung der Algorithmen auf \ac{TTT} sowie die Kodierung des Spiels selbst. 
+Anschließend wird der gewählte Trainingsaufbau der Agenten und die Evaluation mit den zugehörigen Metriken vorgestellt. 
+In Kapitel 4 wird die gewählte Architektur sowie die Implementierung in Java vorgestellt. 
+Kapitel 5 diskutiert die Ergebnisse der Evaluation der Algorithmen und vergleicht diese. 
+Anschließend werden auf Basis der gesammelten Erkenntnisse die Forschungsfragen beantwortet. 
+Zum Schluss wird in Kapitel 6 eine Zusammenfassung der Ergebnisse vorgenommen und der Inhalt der Arbeit wird kritisch betrachtet, bevor ein Ausblick für künftige Arbeiten gegeben wird.
+
+
+ 

@@ -1,0 +1,25 @@
+{\centering
+\begin{minipage}{0.7\textwidth}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwInput{kwAlgorithmParam}{Algorithm parameters}
+
+\kwAlgorithmParam{step size $\alpha \in (0;1]$, small $\epsilon > 0$}
+Initialize $Q(s,a)$, for all $s \in S^+, a \in A(s)$, arbitrarily except that $Q(terminal,\cdot)=0$\;
+\BlankLine
+\ForEach{episode}{
+    Initialize $S$\;
+    \ForEach{step of episode}{
+        Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)\;
+        Take action $A$, observe $R$, $S'$\;
+        $Q(S,A) \leftarrow Q(S,A) + \alpha[R+\gamma \max_{a} Q(S',a)-Q(S,A)]$\;
+        $S \leftarrow S'$
+    }
+}
+\caption{Q-Learning}
+\label{algo_qlearning}
+\end{algorithm}
+\end{minipage}
+\par
+}

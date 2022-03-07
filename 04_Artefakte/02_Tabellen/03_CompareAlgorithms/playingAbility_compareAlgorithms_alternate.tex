@@ -1,0 +1,13 @@
+\begin{table}
+\centering
+\caption[Spielstärke beider Algorithmen unterschiedliche Lernraten, alternierendes \splay]{Spielst"arke beider Algorithmen für unterschiedliche Lernraten nach Training mit alternierendem \splay}
+\label{tab:playingAbility_compareAlgorithms_alternate}
+
+\begin{tabular}{lrrr}
+\toprule
+Lernrate $\alpha$               & Spielst"arke Q-Learning           & Spielst"arke Sarsa                & Differenz QL - Sarsa \\ \midrule
+Konstant 0,1                    & 6.465,66 $\pm$ 481,99             & 6.495,50 $\pm$ 826,74             & \textcolor{red}{-29,84} \\
+Konstant 0,2                    & 6.904,92 $\pm$ 399,15             & 7.018,94 $\pm$ 299,04             & \textcolor{red}{-114,02} \\
+Abnehmend 1 $\rightarrow$ 0,1   & 6.110,56 $\pm$ 224,66             & 7.625,94 $\pm$ \phantom{0}65,10   & \textcolor{red}{-1.515,38} \\ \bottomrule
+\end{tabular}
+\end{table}

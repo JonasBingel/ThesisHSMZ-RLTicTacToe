@@ -1,0 +1,18 @@
+\section{Vergleichsmaßstab der Spielstärke}
+\label{sec:vergleichswerte}
+Zur Evaluation spielen die trainierten Agenten jeweils 10.000 Spiele als beide Symbole gegen den Minimax-Algorithmus und einen Spieler mit Zufallsstrategie, Random. 
+Damit eine Auswertung der Ergebnisse erfolgen kann, ist es zunächst notwendig einen Vergleichsmaßstab zu schaffen. 
+Dafür spielen die Evaluationsgegner, Minimax-Algorithmus und Random, selbst gegeneinander.
+
+\cref{tab:resultmatrix_baseline} enthält die Spielergebnisse jeder Kombination von Minimax und Random.
+Die dargestellten Ergebnisse sind das arithmetische Mittel von fünf Durchläufen und konsistent zu den Experimenten in \cite{mirnovi.QLearningTicTacToe2020}.
+Minimax spielt gegen sich selbst immer zu einem Unentschieden und gewinnt gegen Random in 97\% der Spiele als X und 78\% der Spiele als O.
+Minimax kann gegen Random nicht immer gewinnen, da die Wahrscheinlichkeit besteht, dass Random zufällig optimale Aktionen wählt und das Spiel so in einem Unentschieden endet.
+
+Aus den Testspielen kann zudem die durchschnittliche Wahrscheinlichkeit berechnet werden, mit der eine zufällig gewählte Aktion laut Minimax optimal ist. 
+Für das Symbol X beträgt die Wahrscheinlichkeit ungefähr 70\% und für das Symbol O knapp 38\%. 
+Die Wahrscheinlichkeit ist abhängig vom Symbol, da beispielsweise laut Minimax jede erste Aktion von X optimal ist. Hingegen muss O bereits in seiner ersten Aktion einen Konter für die Aktion von X wählen. Dies erklärt zudem, wieso im Szenario Random gegen Random das Symbol X mehr als die Hälfte der Spiele gewinnt. Basierend auf diesen Spielergebnissen wurde die Spielstärke beider Evaluationsgegner berechnet. 
+Wie in \cref{sec:eval_metrik} beschrieben, ist das Intervall der Spielstärke $[-18.000;9.000]$. 
+Minimax erreicht eine Spielstärke von $6917,86 \pm 22,29$ und Random von $-6938 \pm34,67$.
+
+\input{04_Artefakte/02_Tabellen/resultmatrix_baseline}

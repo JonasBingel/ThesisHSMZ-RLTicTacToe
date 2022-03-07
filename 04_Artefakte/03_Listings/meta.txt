@@ -1,0 +1,49 @@
+Algorithm: Q-Learning
+Experience: Q-Table
+depth penalty applied to reward: true
+Training method: Normal Self-play
+Number of training episodes: 150000
+
+Alpha Change Mode: CONSTANT
+  Value of Alpha: 0.1
+Epsilon Change Mode: DEGRESSIVE_DECAY
+  Initial Value of Epsilon: 1.0
+  Final Value of Epsilon: 0.1
+  Final value reached after 100000 episodes
+
+Training using Self-play
+Number of TRAIN episodes: 150000
+Games won by X: 50736
+Games won by O: 30002
+Games ended in draw: 69262
+
+Experience entries after training: 5478
+Evaluation againstMinimax
+Agent playing as: SYMBOL_X
+Number of EVAL episodes: 10000
+Games won by X: 0
+Games won by O: 0
+Games ended in draw: 10000
+
+Evaluation againstRandom
+Agent playing as: SYMBOL_X
+Number of EVAL episodes: 10000
+Games won by X: 9958
+Games won by O: 0
+Games ended in draw: 42
+
+Evaluation againstMinimax
+Agent playing as: SYMBOL_O
+Number of EVAL episodes: 10000
+Games won by X: 0
+Games won by O: 0
+Games ended in draw: 10000
+
+Evaluation againstRandom
+Agent playing as: SYMBOL_O
+Number of EVAL episodes: 10000
+Games won by X: 0
+Games won by O: 9145
+Games ended in draw: 855
+
+Experience entries after evaluation: 5478

@@ -1,0 +1,25 @@
+{\centering
+\begin{minipage}{0.7\textwidth}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwInput{kwAlgorithmParam}{Algorithm parameters}
+\kwAlgorithmParam{step size $\alpha \in (0;1]$, small $\epsilon > 0$}
+Initialize $Q(s,a)$, for all $s \in S^+, a \in A(s)$, arbitrarily except that $Q(terminal,\cdot)=0$\;
+\BlankLine
+\ForEach{episode}{
+    Initialize $S$\;
+    Choose $A$ from $S$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)\;
+    \ForEach{step of episode}{
+        Take action $A$, observe $R$, $S'$\;
+        Choose $A'$ from $S'$ using policy derived from $Q$ (e.g., $\epsilon$-greedy)\;
+        $Q(S,A) \leftarrow Q(S,A) + \alpha[R+\gamma Q(S',A')-Q(S,A)]$\;
+        $S \leftarrow S'; A \leftarrow A';$
+    }
+}
+\caption{Sarsa}
+\label{algo_sarsa}
+\end{algorithm}
+\end{minipage}
+\par
+}

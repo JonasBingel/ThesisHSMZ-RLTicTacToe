@@ -1,0 +1,16 @@
+\begin{table}
+\centering
+\caption[Spielergebnismatrix \sarsa: abnehmende Lernrate, klassisches \splay]{Spielergebnismatrix für \sarsa mit abnehmender Lernrate, klassisches \splay}
+%\label{tab:resultmatrix_sarsa_normal_alpha_decay}
+
+\begin{tabular}{llrlr}
+\toprule
+ & \multicolumn{2}{l}{\textbf{Minimax}} & \multicolumn{2}{l}{\textbf{Random}} \\ \midrule
+\textbf{X Sarsa}        & X Sarsa:          & 0,00\% $\pm$    0,00\%            & X Sarsa:              & 98,68\% $\pm$ 0,50\%  \\
+                        & O Minimax:        & 0,00\% $\pm$    0,00\%            & O Random:             & 0,00\% $\pm$  0,00\%  \\
+                        & Unentschieden:    & 100,00\% $\pm$  0,00\%            & Unentschieden:        & 1,32\% $\pm$  0,50\%  \\ \cmidrule{2-5}
+\textbf{O Sarsa}        & X Minimax:        & 0,73\% $\pm$    1,18\%            & X Random:             & 0,14\% $\pm$ 0,18\%  \\
+                        & O Sarsa:          & 0,00\% $\pm$    0,00\%            & O Sarsa:              & 87,19\% $\pm$ 2,22\%  \\
+                        & Unentschieden:    & 99,27\% $\pm$   1,18\%            & Unentschieden:        & 12,67\% $\pm$ 2,12\%  \\ \bottomrule
+\end{tabular}
+\end{table}
