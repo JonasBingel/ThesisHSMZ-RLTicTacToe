@@ -4,7 +4,7 @@ Dieses Repository enthält die Bachelorarbeit zu meinem Studium an der HS Mainz 
 
 **Evaluation der Reinforcement Learning Algorithmen Sarsa und Q-Learning am Beispiel eines Strategiespiels**
 
-Die fertige Bachelorarbeit als PDF kann [hier]() eingesehen werden.
+Die fertige Bachelorarbeit als PDF kann [hier](https://github.com/JonasBingel/ThesisHSMZ-RLTicTacToe/blob/main/Bingel_Jonas_Bachelorarbeit.pdf) eingesehen werden.
 
 ## Management Summary
 Die vorliegende Bachelorarbeit befasst sich mit Reinforcement Learning, das ein Teilgebiet
